@@ -93,7 +93,7 @@ const Slider = () => {
                 </p>
                 <button
                   onClick={() => router.push(slide.path)}
-                  className="px-8 py-3 bg-[#633daf] hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-300"
+                  className="w-full md:w-48 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
                 >
                   {slide.cta}
                 </button>

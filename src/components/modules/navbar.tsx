@@ -14,7 +14,7 @@ const Navbar = () => {
   const links = [
     { name: "Home", href: "/" },
     { name: "Products", href: "/products" },
-    { name: "Dashboard", href: "/dashboard" },
+    { name: "Dashboard", href: "/dashboard/add-product" },
   ];
 
   return (
@@ -51,13 +51,13 @@ const Navbar = () => {
           <ModeToggle />
           <Link
             href="/auth/login"
-            className="px-4 py-2 bg-[#633daf] hover:bg-[#bc66ec] text-white rounded-3xl font-semibold transition"
+            className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
           >
             Login
           </Link>
           <Link
             href="/auth/register"
-            className="px-4 py-2 bg-[#633daf] hover:bg-[#bc66ec] text-white rounded-3xl font-semibold transition"
+            className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
           >
             Register
           </Link>
