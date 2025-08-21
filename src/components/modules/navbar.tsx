@@ -52,7 +52,7 @@ const Navbar = () => {
           <Link
             href="/auth/login"
             className="px-4 py-2 text-sm sm:text-base bg-[#633daf] hover:bg-[#bc66ec]   text-white rounded-3xl font-semibold transition"
-          >
+          > 
             Login
           </Link>
           <Link
