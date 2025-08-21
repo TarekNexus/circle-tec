@@ -20,6 +20,7 @@ const AddProductPage = () => {
     image: "",
     price: "",
   });
+  const [loading, setLoading] = useState(false); // <-- loading state
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
@@ -27,9 +28,9 @@ const AddProductPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true); // <-- start loading
 
     try {
-      // Generate numeric ID
       const productWithId = { id: Date.now(), ...product };
 
       const res = await fetch("http://localhost:3000/api/items", {
@@ -46,7 +47,7 @@ const AddProductPage = () => {
         icon: "success",
         confirmButtonText: "OK",
       }).then(() => {
-        router.push("/dashboard");
+        router.push("/products");
       });
     } catch (error) {
       Swal.fire({
@@ -55,6 +56,8 @@ const AddProductPage = () => {
         icon: "error",
         confirmButtonText: "OK",
       });
+    } finally {
+      setLoading(false); // <-- stop loading
     }
   };
 
@@ -69,6 +72,7 @@ const AddProductPage = () => {
           value={product.name}
           onChange={handleChange}
           className="w-full border rounded-md px-3 py-2"
+          required
         />
         <textarea
           name="description"
@@ -76,6 +80,7 @@ const AddProductPage = () => {
           value={product.description}
           onChange={handleChange}
           className="w-full border rounded-md px-3 py-2"
+          required
         />
         <input
           type="text"
@@ -84,6 +89,7 @@ const AddProductPage = () => {
           value={product.image}
           onChange={handleChange}
           className="w-full border rounded-md px-3 py-2"
+          required
         />
         <input
           type="text"
@@ -92,12 +98,39 @@ const AddProductPage = () => {
           value={product.price}
           onChange={handleChange}
           className="w-full border rounded-md px-3 py-2"
+          required
         />
+
         <button
           type="submit"
-         className="w-full  py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
+          disabled={loading} // <-- disable button while loading
+          className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center"
         >
-          Add Product
+          {loading ? (
+            // Spinner
+            <svg
+              className="animate-spin h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+              ></path>
+            </svg>
+          ) : (
+            "Add Product"
+          )}
         </button>
       </form>
     </div>

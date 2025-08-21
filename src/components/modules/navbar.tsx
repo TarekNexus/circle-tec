@@ -50,7 +50,7 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center space-x-4">
           <ModeToggle />
           <Link
-            href="/auth/login"
+            href="/api/auth/login"
             className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
           >
             Login
