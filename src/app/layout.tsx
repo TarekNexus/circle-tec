@@ -38,7 +38,26 @@ export default function RootLayout({
         >
           <Navbar></Navbar>
 
-          <div className="min-h-[calc(100vh-150px)] relative">{children}</div>
+
+<div className="min-h-screen w-full relative">
+  {/* Azure Depths Background */}
+  <div
+    className="
+      absolute inset-0 z-0
+      bg-[radial-gradient(125%_125%_at_50%_10%,#ffffff_40%,#e0e0ff_100%)]
+      dark:bg-[radial-gradient(125%_125%_at_50%_10%,#000000_40%,#010133_100%)]
+    "
+  />
+
+  {/* Foreground content */}
+  <div className="relative z-10">
+    <div className="min-h-[calc(100vh-150px)] relative">
+      {children}
+    </div>
+  </div>
+</div>
+
+      
 
           <Footer></Footer>
         </ThemeProvider>
@@ -46,3 +65,4 @@ export default function RootLayout({
     </html>
   );
 }
+

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
 
 interface Product {
   id: number;
@@ -11,7 +12,10 @@ interface Product {
   price: string;
 }
 
-const ProductListPage = () => {
+const ProductDetailsPage = () => {
+  const { id } = useParams();
+  const router = useRouter();
+
   const products: Product[] = [
     { id: 1, name: "Gaming Laptop", description: "High-performance laptop for gaming and productivity.", image: "https://i.ibb.co/7J4cgJDV/02naa-Ok-VLe7-DIiej-FUy-DPJp-64.webp", price: "$1,299" },
     { id: 2, name: "Mechanical Keyboard", description: "Durable and tactile keyboard with RGB lighting.", image: "/products/keyboard1.png", price: "$129" },
@@ -27,55 +31,57 @@ const ProductListPage = () => {
     { id: 12, name: "Bluetooth Speaker", description: "Portable Bluetooth speaker with powerful sound.", image: "https://i.ibb.co/9hQzBxJ/speaker.jpg", price: "$99" },
   ];
 
-  return (
-    <section className="py-16  min-h-screen">
-      <div className="w-11/12 mx-auto text-center mb-12">
-        <h1 className="text-4xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
-          Our Top Products
-        </h1>
-        <p className="text-gray-700 dark:text-gray-300 text-lg">
-          Explore our selection of high-quality computer products and accessories. Find the perfect gadget to boost your productivity or gaming experience.
-        </p>
+  const product = products.find(p => p.id === Number(id));
+
+  if (!product) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Product not found</h2>
       </div>
+    );
+  }
 
-      <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-        {products.map((product) => (
-          <div key={product.id} className="relative bg-white dark:bg-gray-800 rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-500 overflow-hidden group">
-            {/* Image */}
-            <div className="relative w-full h-48">
-              <Image
-                src={product.image}
-                alt={product.name}
-                fill
-                style={{ objectFit: "cover" }}
-                className="transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-500" />
-            </div>
+  return (
+    <section className="py-16 min-h-screen">
+      <div className="w-11/12 max-w-6xl mx-auto flex flex-col md:flex-row gap-8">
+        {/* Product Image */}
+        <div className="relative w-full md:w-1/2 h-96 rounded-3xl overflow-hidden shadow-lg">
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            style={{ objectFit: "cover" }}
+            className="rounded-3xl"
+          />
+        </div>
 
-            {/* Content */}
-            <div className="px-4 pt-4 pb-6 text-center">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                {product.name}
-              </h3>
-              <p className="text-red-600 dark:text-red-400 font-semibold text-md mb-2">
-                {product.price}
-              </p>
-              <p className="text-gray-600 dark:text-gray-300 text-xs mb-4">
-                {product.description}
-              </p>
-              <button
-                onClick={() => (window.location.href = `/products/${product.id}`)}
-                className="w-full py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                Details
-              </button>
-            </div>
-          </div>
-        ))}
+        {/* Product Details */}
+        <div className="flex-1 flex flex-col justify-center text-center md:text-left">
+          <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4">
+            {product.name}
+          </h1>
+          <p className="text-red-600 dark:text-red-400 font-bold text-2xl mb-4">
+            {product.price}
+          </p>
+          <p className="text-gray-700 dark:text-gray-300 text-lg mb-6">
+            {product.description}
+          </p>
+          <button
+            onClick={() => alert("Add to cart functionality here")}
+            className="w-full md:w-48 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
+          >
+            Buy Now
+          </button>
+          <button
+            onClick={() => router.back()}
+            className="w-full md:w-48 mt-4 py-3 bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
+          >
+            Go Back
+          </button>
+        </div>
       </div>
     </section>
   );
 };
 
-export default ProductListPage;
+export default ProductDetailsPage;
