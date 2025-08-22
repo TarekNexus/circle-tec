@@ -24,11 +24,11 @@ It provides users with secure authentication, product browsing, and a smooth sho
 
 ## 🚀 Tech Stack  
 
-- **Frontend:** Next.js, React, Tailwind CSS, Shadcn UI  
-- **Backend:** Next.js API Routes, 
+- **Frontend:** Next.js, React, TypeScript, Tailwind CSS, Shadcn UI  
+- **Backend:** Next.js API Routes  
 - **Database:** MongoDB (Atlas)  
 - **Authentication:** NextAuth.js (Google & Credentials)  
-- **Deployment:** Vercel  
+- **Deployment:** Vercel   
 
 ## 🛠️ Setup & Installation  
 
