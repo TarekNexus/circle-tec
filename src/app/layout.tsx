@@ -10,8 +10,10 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "My App",
-  description: "Next.js + NextAuth",
+  title: 'CIRCLE TEC',
+  icons: {
+    icon: '/footer.png', // Path inside public folder
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
