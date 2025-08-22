@@ -36,7 +36,7 @@ const SkeletonCard = () => (
 const ProductListPage = () => {
   // useSWR for caching and automatic revalidation
   const { data: products, isLoading } = useSWR<Product[]>(
-    "http://localhost:3000/api/items",
+    "https://circle-tec.vercel.app/api/items",
     fetcher,
     { revalidateOnFocus: false }
   );
