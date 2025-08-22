@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
+import { useSession } from "next-auth/react";
 
 interface Product {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   image: string;
@@ -14,13 +15,21 @@ interface Product {
 
 const AddProductPage = () => {
   const router = useRouter();
+  const { data: session, status } = useSession();
   const [product, setProduct] = useState<Omit<Product, "id">>({
     name: "",
     description: "",
     image: "",
     price: "",
   });
-  const [loading, setLoading] = useState(false); // <-- loading state
+  const [loading, setLoading] = useState(false);
+
+  // Redirect client-side if not authenticated
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/auth/login");
+    }
+  }, [status, router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
@@ -28,15 +37,13 @@ const AddProductPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true); // <-- start loading
+    setLoading(true);
 
     try {
-      const productWithId = { id: Date.now(), ...product };
-
-      const res = await fetch("http://localhost:3000/api/items", {
+      const res = await fetch("/api/products/add-product", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(productWithId),
+        body: JSON.stringify(product),
       });
 
       if (!res.ok) throw new Error("Failed to add product");
@@ -51,15 +58,21 @@ const AddProductPage = () => {
       });
     } catch (error) {
       Swal.fire({
-        title: {error},
+        title: "Error",
         text: "Failed to add product",
         icon: "error",
         confirmButtonText: "OK",
       });
     } finally {
-      setLoading(false); // <-- stop loading
+      setLoading(false);
     }
   };
+
+  // Show loading spinner while session is being fetched
+  if (status === "loading") return <p className="text-center mt-10">Loading...</p>;
+
+  // Don't render form until authenticated
+  if (status !== "authenticated") return null;
 
   return (
     <div className="max-w-xl mx-auto py-16">
@@ -100,33 +113,20 @@ const AddProductPage = () => {
           className="w-full border rounded-md px-3 py-2"
           required
         />
-
         <button
           type="submit"
-          disabled={loading} // <-- disable button while loading
+          disabled={loading}
           className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center"
         >
           {loading ? (
-            // Spinner
             <svg
               className="animate-spin h-5 w-5 text-white"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
             >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              ></circle>
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-              ></path>
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
             </svg>
           ) : (
             "Add Product"
