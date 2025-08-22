@@ -1,9 +1,17 @@
 # 🛒 Circle-Tec Online Store  
 
 
-A modern e-commerce web application built with **Next.js, NextAuth, and MongoDB**.  
-It provides secure authentication, product browsing, and a smooth shopping experience.  
-🔗 **Live Demo:** [https://circle-tec.vercel.app/](https://circle-tec.vercel.app/)  
+# 🛒 Circle-Tec
+
+**Circle-Tec** is a modern e-commerce web application built with **Next.js**, **NextAuth**, and **MongoDB**.  
+It provides users with secure authentication, product browsing, and a smooth shopping experience.
+
+---
+
+## 🔗 Live Links
+
+🌐 **Live Site:** [https://circle-tec.vercel.app/](https://circle-tec.vercel.app/)
+
 ---
 
 ## 🚀 Features  
