@@ -31,7 +31,7 @@ export default function Login() {
           text: "You have successfully logged in.",
           confirmButtonColor: "#3085d6",
         });
-        window.location.href = "/";
+        window.location.href = "/products";
       } else {
         await Swal.fire({
           icon: "error",
@@ -47,7 +47,7 @@ export default function Login() {
 
   const handleGoogleLogin = async () => {
     setGoogleLoading(true);
-    await signIn("google", { callbackUrl: "/" });
+    await signIn("google", { callbackUrl: "/products" });
     setGoogleLoading(false);
   };
 
