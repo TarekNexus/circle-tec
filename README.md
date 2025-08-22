@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 Circle-Tec Online Store  
 
-## Getting Started
 
-First, run the development server:
+A modern e-commerce web application built with **Next.js, NextAuth, and MongoDB**.  
+It provides secure authentication, product browsing, and a smooth shopping experience.  
+🔗 **Live Demo:** [https://circle-tec.vercel.app/](https://circle-tec.vercel.app/)  
+---
 
+## 🚀 Features  
+- 🔑 Authentication with **NextAuth** (Google & Credentials login)  
+- 📦 Product listing and browsing  
+- 🗄️ MongoDB database integration  
+- 🎨 Responsive design with Tailwind CSS  
+- ☁️ Deployment ready with **Vercel**  
+
+---
+
+
+## 🚀 Tech Stack  
+
+- **Frontend:** Next.js, React, Tailwind CSS, Shadcn UI  
+- **Backend:** Next.js API Routes, 
+- **Database:** MongoDB (Atlas)  
+- **Authentication:** NextAuth.js (Google & Credentials)  
+- **Deployment:** Vercel  
+
+## 🛠️ Setup & Installation  
+
+### 1. Clone the repository  
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+git clone https://github.com/TarekNexus/circle-tec
+cd circle-tec
 
-Open [https://circle-tec.vercel.app](https://circle-tec.vercel.app) with your browser to see the result.
+### 2. Install dependencies
+ npm install
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+ ### 3. Configure environment variables
+ - Create a .env.local file in the project root:
+ MONGODB_URI=your_mongodb_connection_string
+DB_NAME=storeDB
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
 
-## Learn More
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your_random_secret
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3. Run the development server
+- npm run dev
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## 📌 Route Summary  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Route             | Description                          |
+|-------------------|--------------------------------------|
+| `/`               | Homepage with featured products      |
+| `/products`       | All products listing                 |
+| `/products/[id]`  | Product details page                 |
+| `/auth/login`     | Login page                           |
+| `/auth/register`  | Register new account                 |
+| `/api/auth/*`     | NextAuth authentication routes       |
+| `/dashboard`      | User dashboard (protected)           |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
