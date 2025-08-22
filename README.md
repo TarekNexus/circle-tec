@@ -1,8 +1,6 @@
 # 🛒 Circle-Tec Online Store  
 
 
-# 🛒 Circle-Tec
-
 **Circle-Tec** is a modern e-commerce web application built with **Next.js**, **NextAuth**, and **MongoDB**.  
 It provides users with secure authentication, product browsing, and a smooth shopping experience.
 
